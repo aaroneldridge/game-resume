@@ -1,6 +1,5 @@
-class boundingbox {
-//a bounding box for the hitbox of different entities
-
+class BoundingBox{
+//a bounding box for the collision box of different entities
     constructor (x,y,width,height) 
     {
         Object.assign(this, { x, y, width, height });
@@ -12,7 +11,7 @@ class boundingbox {
         this.width = width;
         //height(downwards) of bounding box
         this.height = height;
-    }
+    };
 
     collide (other)
     {
@@ -22,6 +21,6 @@ class boundingbox {
             return true; 
         } 
         return false;
-    }
+    };
 
-}
+};

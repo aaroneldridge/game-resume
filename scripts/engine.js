@@ -5,7 +5,7 @@ class Engine {
 
         this.ctx = ctx;
         this.canvas = canvas;
-        this.player = new Player(canvas,ctx);
+        this.player = new Player(this,canvas,ctx);
 
         this.entityList = [];
         this.entityList[0] = this.player;
@@ -17,6 +17,11 @@ class Engine {
         this.spacekey = false;
 
     };
+
+	init()
+	{
+		this.takeInput();
+	}
 
     animate ()
     {
@@ -34,67 +39,52 @@ class Engine {
     {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
-        this.entityList.forEach(element => element.update());
+        this.entityList.forEach(element => element.update(this));
         this.entityList.forEach(element => element.draw());
-
     };
 
     takeInput () 
     {
-        this.ctx.canvas.addEventListener("keydown", function (e) {
-			console.log(e);
+		var that = this;
+		document.addEventListener("keydown", function (e) {
 			switch (e.code) {
 				case "ArrowLeft":
-					that.left = true;
+					that.leftkey = true;
 					break;
 				case "ArrowRight":
-					that.right = true;
+					that.rightkey = true;
 					break;
 				case "ArrowUp":
-					that.up = true;
+					that.upkey = true;
 					break;
 				case "ArrowDown":
-					that.down = true;
+					that.downkey = true;
 					break;
 				case "Space":
-					that.space = true;
-					break;
-				case "KeyZ":
-					that.z = true;
-					break;
-				case "KeyX":
-					that.x = true;
+					that.spacekey = true;
 					break;
 			}
 		}, false);
 		
-		this.ctx.canvas.addEventListener("keyup", function (e) {
+		document.addEventListener("keyup", function (e) {
 			switch (e.code) {
 				case "ArrowLeft":
-					that.left = false;
+					that.leftkey = false;
 					break;
 				case "ArrowRight":
-					that.right = false;
+					that.rightkey = false;
 					break;
 				case "ArrowUp":
-					that.up = false;
+					that.upkey = false;
 					break;
 				case "ArrowDown":
-					that.down = false;
+					that.downkey = false;
 					break;
 				case "Space":
-					that.space = false;
-					break;
-				case "KeyZ":
-					that.z = false;
-					break;
-				case "KeyX":
-					that.x = false;
+					that.spacekey = false;
 					break;
 			}
 		}, false);
-    };
-    
+	 };
     
 };

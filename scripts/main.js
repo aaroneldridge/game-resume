@@ -8,5 +8,6 @@ var ctx = canvas.getContext('2d');
 const engine = new Engine(canvas,ctx);
 
 //begin animation
-engine.takeInput();
+engine.init();
 engine.animate();
+
