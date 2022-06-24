@@ -4,11 +4,11 @@ class Engine {
     {
 
         this.ctx = ctx;
-        this.canvas = canvas;
-        this.player = new Player(this,canvas,ctx);
+        this.canvas = canvas;;
 
         this.entityList = [];
-        this.entityList[0] = this.player;
+        this.player = new Player(this,canvas,ctx);
+		this.entityList[0] = new Platform(this,canvas,ctx,50,1000,40,40);
 
         this.upkey = false;
         this.downkey = false;
@@ -39,8 +39,15 @@ class Engine {
     {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        this.entityList.forEach(element => element.update(this));
+
+		//update and draw all entities
+        this.entityList.forEach(element => element.update());
         this.entityList.forEach(element => element.draw());
+
+		//update and draw player
+		this.player.update();
+		this.player.draw();
+		
     };
 
     takeInput () 

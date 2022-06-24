@@ -9,7 +9,7 @@ class Player {
         this.ctx = ctx;
         this.game = game;
 
-        //object details
+        //object details (radius)
         this.width = 30;
         this.height = 30;
 
@@ -75,16 +75,38 @@ class Player {
             this.x_pos = window.innerWidth - this.boundingBox.width;
         }
 
+        if(this.game.upkey)
+        {
+            console.log(this.boundingBox,this.game.entityList[1].boundingBox);
+        }
+
         this.setBoundingBox();
+
+        //checking for collisions
+        var that = this;
+        this.game.entityList.forEach(element => {
+            if(element.boundingBox && that.boundingBox.collide(element.boundingBox))
+            {
+                if(element instanceof Platform)
+                {
+                    console.log('inside platform');
+                    if(that.lastBoundingBox.bottom >= element.top)
+                    {
+                        that.y_pos = element.top;
+                    }
+                }
+
+            }
+        });
 
     };
 
     //drawing the player using the given coordinates
     draw()
     {
+        this.ctx.strokeStyle = "blue";
         this.ctx.beginPath();
         this.ctx.arc(this.x_pos,this.y_pos,this.width,0,2*Math.PI);
-        this.ctx.strokeStyle = "black";
         this.ctx.stroke();
     };
 
@@ -92,7 +114,16 @@ class Player {
     setBoundingBox()
     {
         this.lastBoundingBox = this.boundingBox;
-        this.boundingBox = new BoundingBox(this.x_pos,this.y_pos,this.width,this.height);
+        this.boundingBox = new BoundingBox(this.x_pos-this.width,this.y_pos-this.width,this.width*2,this.height*2);
+        
+        //draw debug bounding box
+        if(true)
+        {
+            this.ctx.strokeStyle = "red";
+            this.ctx.beginPath();
+            this.ctx.rect(this.x_pos-this.width,this.y_pos-this.width,this.width*2,this.height*2);
+            this.ctx.stroke();
+        }
     };
 }
 
