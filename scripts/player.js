@@ -26,6 +26,7 @@ class Player {
         this.boundingBox = null;
         this.lastBoundingBox = null;
         this.setBoundingBox();
+
     };
 
     //updating the player for the next frame
@@ -36,39 +37,54 @@ class Player {
         {
             this.x_vel = -5;
         }
+
         //move character right
         if(this.game.rightkey)
         {
             this.x_vel = 5;
         }
+
         //jump function
         if(this.game.spacekey && this.grounded)
         {
             this.y_vel = -10;
             this.grounded = false;
         }
+
         //no input option, sit still
-        if((!this.game.rightkey && !this.game.leftkey) || (this.game.rightkey && this.game.leftkey))
+        if((!this.game.rightkey && !this.game.leftkey) ||
+         (this.game.rightkey && this.game.leftkey))
         {
             this.x_vel = 0;
         }
+
+        if(this.grounded)
+        {
+            this.y_accel = 0;
+        } else {
+            this.y_accel = .2;
+        }
+
+      
         //update all position and velocity values
         this.x_pos += this.x_vel;
         this.y_pos += this.y_vel;
         this.x_vel += this.x_accel; 
         this.y_vel += this.y_accel;
-        //keep character above ground
 
+        //keep character above ground
         if(this.y_pos > window.innerHeight-this.height)
         {
             this.y_pos = window.innerHeight-this.height;
             this.grounded = true;
         }
+
         //keep inside to the right
         if(this.x_pos < (this.width))
         {
             this.x_pos = this.width;
         }
+
         //keep inside to the left
         if(this.x_pos > window.innerWidth-this.boundingBox.width)
         {
@@ -77,7 +93,7 @@ class Player {
 
         if(this.game.upkey)
         {
-            console.log(this.boundingBox,this.game.entityList[1].boundingBox);
+            
         }
 
         this.setBoundingBox();
@@ -89,15 +105,43 @@ class Player {
             {
                 if(element instanceof Platform)
                 {
-                    console.log('inside platform');
-                    if(that.lastBoundingBox.bottom >= element.top)
+                    //left side of platform interaction
+                    if(that.boundingBox.left < element.boundingBox.left
+                        && that.boundingBox.bottom > element.boundingBox.top)
                     {
-                        that.y_pos = element.top;
+                        that.x_pos = element.boundingBox.left-that.width;
                     }
-                }
 
+                    //right side of platform interaction
+                    if(that.boundingBox.right > element.boundingBox.right
+                     && that.boundingBox.bottom > element.boundingBox.top)
+                    {
+                        that.x_pos = element.boundingBox.right+that.width;
+                    }
+
+                    
+
+                    //top of platform interaction
+                    if(that.lastBoundingBox.bottom <= element.boundingBox.top)
+                    { 
+                        that.grounded = true;
+                        that.y_pos = element.boundingBox.top-that.height;
+
+                    }
+
+                    //hit head on bottom of platform
+                    if(that.lastBoundingBox.top > element.boundingBox.bottom)
+                    {
+                        that.y_vel=0;
+                    }
+
+
+                }
             }
+
         });
+
+        this.setBoundingBox();
 
     };
 
@@ -117,7 +161,7 @@ class Player {
         this.boundingBox = new BoundingBox(this.x_pos-this.width,this.y_pos-this.width,this.width*2,this.height*2);
         
         //draw debug bounding box
-        if(true)
+        if(false)
         {
             this.ctx.strokeStyle = "red";
             this.ctx.beginPath();
