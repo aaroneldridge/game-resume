@@ -78,10 +78,12 @@ class Player {
         this.x_vel += this.x_accel; 
         this.y_vel += this.y_accel;
 
+        var floorheight = window.innerHeight-this.height-50
+
         //keep character above ground
-        if(this.y_pos > window.innerHeight-this.height)
+        if(this.y_pos > floorheight)
         {
-            this.y_pos = window.innerHeight-this.height;
+            this.y_pos = floorheight;
             this.grounded = true;
         }
 
@@ -97,18 +99,23 @@ class Player {
             this.x_pos = window.innerWidth - this.boundingBox.width;
         }
 
+        //interact with object
         if(this.game.upkey && this.insideInteractable )
         {
             document.getElementById(this.currentInteractable.popup).style.display = "block";
             this.formOpen = true;
         }
 
+        //close interacted object
         if(this.game.downkey && this.formOpen)
         {
             document.getElementById(this.currentInteractable.popup).style.display = "none";
         }
+
+        //update bounding box before collision
         this.setBoundingBox();
 
+    
         //checking for collisions
         var that = this;
         this.game.entityList.forEach(element => {
@@ -158,10 +165,9 @@ class Player {
                 this.insideInteractable = false;
             }
 
-            console.log(this.insideInteractable);
-
         });
 
+        //update bounding box again after handling collisions
         this.setBoundingBox();
 
     };

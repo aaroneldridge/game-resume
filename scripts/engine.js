@@ -8,21 +8,40 @@ class Engine {
 
         this.entityList = [];
         this.player = new Player(this,canvas,ctx);
-		this.entityList[0] = new Platform(this,canvas,ctx,400,900,500,400);
-		this.entityList[1] = new Interactable(this,canvas,ctx,999,900,100,400,"personalSites");
+		this.entityList[0] = new Platform(this,canvas,ctx,0,window.innerHeight-250,100,200);
+		this.entityList[1] = new Interactable(this,canvas,ctx,0,window.innerHeight-400,100,150,"personalSites");
 
+		//boolean values for input keys
         this.upkey = false;
         this.downkey = false;
         this.leftkey = false;
         this.rightkey = false;
         this.spacekey = false;
 
+		//loading Images
+		this.backgroundImage = new Image();
+		this.backgroundImage.src = "images/bliss_pixel2.png";
+		this.backgroundImage.onload = function () {}
+		this.taskbarImage = new Image();
+		this.taskbarImage.src = "images/windows_taskbar.jpg"
+		this.taskbarImage.onload = function () {}
+
+
     };
 
 	init()
 	{
 		this.takeInput();
-	}
+		this.loop();
+	};
+
+	//static images to draw for every frame
+	drawBackground()
+	{
+		this.ctx.drawImage(this.backgroundImage,0,0,window.innerWidth,window.innerHeight);
+		this.ctx.drawImage(this.taskbarImage,0,window.innerHeight-50,window.innerWidth,50);
+	};
+
 
     animate ()
     {
@@ -39,7 +58,9 @@ class Engine {
     loop ()
     {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);		
+
+		this.drawBackground();
 
 		//update and draw all entities
         this.entityList.forEach(element => element.update());
@@ -48,7 +69,8 @@ class Engine {
 		//update and draw player
 		this.player.update();
 		this.player.draw();
-		
+	
+
     };
 
     takeInput () 
