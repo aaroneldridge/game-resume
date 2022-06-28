@@ -8,11 +8,8 @@ class Engine {
 
         this.entityList = [];
         this.player = new Player(this,canvas,ctx);
-		this.entityList[0] = new Platform(this,canvas,ctx,100,500,500,400);
-		this.entityList[1] = new Platform(this,canvas,ctx,100,500,500,400);
-		this.entityList[2] = new Platform(this,canvas,ctx,100,500,500,400);
-
-
+		this.entityList[0] = new Platform(this,canvas,ctx,400,900,500,400);
+		this.entityList[1] = new Interactable(this,canvas,ctx,999,900,100,400,"personalSites");
 
         this.upkey = false;
         this.downkey = false;

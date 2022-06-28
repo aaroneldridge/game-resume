@@ -1,24 +1,25 @@
-class Platform
+class Interactable
 {
 //a rectangular platform
 
-    constructor (game,canvas,ctx,x,y,width,height)
+    constructor (game,canvas,ctx,x,y,width,height,popup)
     {
-        //context and and engine reference
-        this.cavnas = canvas;
-        this.ctx = ctx;
-        this.game = game;
+    //context and and engine reference
+    this.cavnas = canvas;
+    this.ctx = ctx;
+    this.game = game;
 
-        //object details
-        this.width = width;
-        this.height = height;
-        this.x_pos = x;
-        this.y_pos = y;
+    //object details
+    this.width = width;
+    this.height = height;
+    this.x_pos = x;
+    this.y_pos = y;
+    this.popup = popup;
 
-        //bounding box for hitbox
-        this.boundingBox = null;
-        this.lastBoundingBox = null;
-        this.setBoundingBox();
+    //bounding box for hitbox
+    this.boundingBox = null;
+    this.lastBoundingBox = null;
+    this.setBoundingBox();
 
     };
 
@@ -46,10 +47,10 @@ class Platform
     
     draw()
     {
-        this.ctx.strokeStyle = "black";
+        this.ctx.strokeStyle = "green";
         this.ctx.beginPath();
         this.ctx.rect(this.x_pos,this.y_pos,this.width,this.height);
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "green";
         this.ctx.fill();
         this.ctx.stroke();
     };

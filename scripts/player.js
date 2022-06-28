@@ -27,6 +27,12 @@ class Player {
         this.lastBoundingBox = null;
         this.setBoundingBox();
 
+        this.insideInteractable = false;
+        this.currentInteractable = null;
+        this.canInteract = true;
+        this.formOpen = false;
+
+
     };
 
     //updating the player for the next frame
@@ -91,11 +97,16 @@ class Player {
             this.x_pos = window.innerWidth - this.boundingBox.width;
         }
 
-        if(this.game.upkey)
+        if(this.game.upkey && this.insideInteractable )
         {
-            
+            document.getElementById(this.currentInteractable.popup).style.display = "block";
+            this.formOpen = true;
         }
 
+        if(this.game.downkey && this.formOpen)
+        {
+            document.getElementById(this.currentInteractable.popup).style.display = "none";
+        }
         this.setBoundingBox();
 
         //checking for collisions
@@ -137,7 +148,17 @@ class Player {
 
 
                 }
+
+                if (element instanceof Interactable)
+                {
+                    this.insideInteractable = true;
+                    this.currentInteractable = element;
+                } 
+            } else {
+                this.insideInteractable = false;
             }
+
+            console.log(this.insideInteractable);
 
         });
 
