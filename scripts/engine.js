@@ -13,6 +13,7 @@ class Engine {
 		this.entityList[0] = new Platform(this,canvas,ctx,0,window.innerHeight-250,100,200);
 		this.entityList[1] = new Interactable(this,canvas,ctx,0,window.innerHeight-400,100,150,"personalSites");
 
+
 		//boolean values for input keys
         this.upkey = false;
         this.downkey = false;
@@ -34,7 +35,10 @@ class Engine {
 	init()
 	{
 		this.takeInput();
-		this.loop();
+		var that = this;
+		setInterval(function() {
+			that.loop();
+		},1);
 	};
 
 	//static images to draw for every frame
@@ -49,25 +53,26 @@ class Engine {
 	};
 
 
-    animate ()
-    {
-        //starting frame loop
-        const gameLoop = () => 
-        {
-            this.loop();
-            requestAnimationFrame(gameLoop,canvas);
-            //clears previous drawing for next frame
-        };
-        gameLoop();
-    };
+    // animate ()
+    // {
+    //     //starting frame loop
+    //     //const gameLoop = () => 
+       
+    //         this.loop();
+    //         requestAnimationFrame(animate,canvas);
+    //         //clears previous drawing for next frame
+    //  	// };
+    //     //gameLoop();
+    // };
 
     loop ()
     {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);		
 
-		this.drawBackground();
+		console.log("loop");
 
+		//this.drawBackground();
 		//update and draw all entities
         this.entityList.forEach(element => element.update());
         this.entityList.forEach(element => element.draw());
@@ -76,7 +81,7 @@ class Engine {
 		this.player.update();
 		this.player.draw();
 	
-
+		console.log('done');
     };
 
     takeInput () 
