@@ -72,7 +72,7 @@ class Engine {
 
 		console.log("loop");
 
-		//this.drawBackground();
+		this.drawBackground();
 		//update and draw all entities
         this.entityList.forEach(element => element.update());
         this.entityList.forEach(element => element.draw());
