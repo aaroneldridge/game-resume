@@ -27,6 +27,7 @@ class Player {
         this.lastBoundingBox = null;
         this.setBoundingBox();
 
+        //check relationship with interactable objects
         this.insideInteractable = false;
         this.currentInteractable = null;
         this.canInteract = true;
@@ -64,6 +65,7 @@ class Player {
             this.x_vel = 0;
         }
 
+        //stop accumulating negative velocity while on ground
         if(this.grounded)
         {
             this.y_accel = 0;
@@ -78,6 +80,7 @@ class Player {
         this.x_vel += this.x_accel; 
         this.y_vel += this.y_accel;
 
+        //constant floorheight to reference (50 accounts for start-bar)
         var floorheight = window.innerHeight-this.height-50
 
         //keep character above ground
@@ -121,6 +124,7 @@ class Player {
         this.game.entityList.forEach(element => {
             if(element.boundingBox && that.boundingBox.collide(element.boundingBox))
             {
+                //check if element is a platform
                 if(element instanceof Platform)
                 {
                     //left side of platform interaction
@@ -152,10 +156,9 @@ class Player {
                     {
                         that.y_vel=0;
                     }
-
-
                 }
 
+                //check if element is ANY interactable
                 if (element instanceof Interactable)
                 {
                     this.insideInteractable = true;

@@ -3,9 +3,11 @@ class Engine {
     constructor (canvas,ctx)
     {
 
-        this.ctx = ctx;
-        this.canvas = canvas;;
+		//canvas and context
+		this.ctx = ctx;
+        this.canvas = canvas;
 
+		//list of all entities in the game
         this.entityList = [];
         this.player = new Player(this,canvas,ctx);
 		this.entityList[0] = new Platform(this,canvas,ctx,0,window.innerHeight-250,100,200);
@@ -38,8 +40,12 @@ class Engine {
 	//static images to draw for every frame
 	drawBackground()
 	{
+		//windows hill background
 		this.ctx.drawImage(this.backgroundImage,0,0,window.innerWidth,window.innerHeight);
+		//windows taskbar background
 		this.ctx.drawImage(this.taskbarImage,0,window.innerHeight-50,window.innerWidth,50);
+
+		//icons go below vvv
 	};
 
 
@@ -75,6 +81,8 @@ class Engine {
 
     takeInput () 
     {
+		
+		//check input for each key
 		var that = this;
 		document.addEventListener("keydown", function (e) {
 			switch (e.code) {
@@ -96,6 +104,7 @@ class Engine {
 			}
 		}, false);
 		
+		//check release for each key
 		document.addEventListener("keyup", function (e) {
 			switch (e.code) {
 				case "ArrowLeft":
