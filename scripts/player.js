@@ -19,7 +19,7 @@ class Player {
         this.x_vel = 0;
         this.y_vel = 0;
         this.x_accel = 0;
-        this.y_accel = .2;
+        this.y_accel = .1;
         this.grounded = false;
 
         //bounding box for hitbox
@@ -42,19 +42,19 @@ class Player {
         //move character left
         if(this.game.leftkey)
         {
-            this.x_vel = -5;
+            this.x_vel = -3;
         }
 
         //move character right
         if(this.game.rightkey)
         {
-            this.x_vel = 5;
+            this.x_vel = 3;
         }
 
         //jump function
         if(this.game.spacekey && this.grounded)
         {
-            this.y_vel = -10;
+            this.y_vel = -5;
             this.grounded = false;
         }
 
@@ -70,7 +70,7 @@ class Player {
         {
             this.y_accel = 0;
         } else {
-            this.y_accel = .2;
+            this.y_accel = .05;
         }
 
       
@@ -117,7 +117,6 @@ class Player {
 
         //update bounding box before collision
         this.setBoundingBox();
-
     
         //checking for collisions
         var that = this;

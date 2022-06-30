@@ -52,19 +52,6 @@ class Engine {
 		//icons go below vvv
 	};
 
-
-    // animate ()
-    // {
-    //     //starting frame loop
-    //     //const gameLoop = () => 
-       
-    //         this.loop();
-    //         requestAnimationFrame(animate,canvas);
-    //         //clears previous drawing for next frame
-    //  	// };
-    //     //gameLoop();
-    // };
-
     loop ()
     {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
