@@ -2,7 +2,7 @@ class Interactable
 {
 //a rectangular platform
 
-    constructor (game,canvas,ctx,x,y,width,height,popup)
+    constructor (game,canvas,ctx,x,y,width,height,modal_ID)
     {
     //context and and engine reference
     this.cavnas = canvas;
@@ -14,7 +14,7 @@ class Interactable
     this.height = height;
     this.x_pos = x;
     this.y_pos = y;
-    this.popup = popup;
+    this.modal_ID = modal_ID;
 
     //bounding box for hitbox
     this.boundingBox = null;

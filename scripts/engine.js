@@ -7,11 +7,37 @@ class Engine {
 		this.ctx = ctx;
         this.canvas = canvas;
 
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
+
+		console.log('Width: ', window.innerWidth);
+		console.log('Height: ', window.innerHeight);
+
 		//list of all entities in the game
         this.entityList = [];
         this.player = new Player(this,canvas,ctx);
-		this.entityList[0] = new Platform(this,canvas,ctx,0,window.innerHeight-250,100,200);
-		this.entityList[1] = new Interactable(this,canvas,ctx,0,window.innerHeight-400,100,150,"personalSites");
+		//										                x_pos				y_pos							width		      height
+		this.entityList.push(new Platform(		this,canvas,ctx,0,					this.height-this.height*0.1535,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.3070,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,0,					this.height-this.height*0.5629,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.7676,	this.width*0.0538,this.height*0.10235));
+
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-this.height*0.1535,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-this.height*0.1535-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535),	this.width*0.0538,this.height*0.10235));
+
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(5*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
+
+		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235,null));
+		this.entityList.push(new Interactable(	this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.8700,	this.width*0.0538,this.height*0.10235,"modal_personal_sites"));
+		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-(2*this.height*0.10235),	this.width*0.0538,this.height*0.10235,null));
+
+
+
+
 
 
 		//boolean values for input keys
@@ -47,7 +73,7 @@ class Engine {
 		//windows hill background
 		this.ctx.drawImage(this.backgroundImage,0,0,window.innerWidth,window.innerHeight);
 		//windows taskbar background
-		this.ctx.drawImage(this.taskbarImage,0,window.innerHeight-50,window.innerWidth,50);
+		this.ctx.drawImage(this.taskbarImage,0,this.height-this.height*0.051177,window.innerWidth,this.height*0.051177);
 
 		//icons go below vvv
 	};
@@ -56,8 +82,6 @@ class Engine {
     {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);		
-
-		console.log("loop");
 
 		this.drawBackground();
 		//update and draw all entities
@@ -68,7 +92,6 @@ class Engine {
 		this.player.update();
 		this.player.draw();
 	
-		console.log('done');
     };
 
     takeInput () 

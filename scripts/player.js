@@ -1,4 +1,3 @@
-
 class Player {
 
     constructor(game,canvas,ctx)
@@ -10,16 +9,16 @@ class Player {
         this.game = game;
 
         //object details (radius)
-        this.width = 30;
+        this.width = window.innerHeight*0.03070;
         this.height = 30;
 
         //setting base values
         this.x_pos = (window.innerWidth/2);
-        this.y_pos = 100;
+        this.y_pos = 1000;
         this.x_vel = 0;
         this.y_vel = 0;
         this.x_accel = 0;
-        this.y_accel = .1;
+        this.y_accel = window.innerHeight*0.0001023541;
         this.grounded = false;
 
         //bounding box for hitbox
@@ -39,6 +38,78 @@ class Player {
     //updating the player for the next frame
     update ()
     {
+
+         //checking for collisions
+         var that = this;
+         this.game.entityList.forEach(element => {
+             if(element.boundingBox && that.boundingBox.collide(element.boundingBox))
+             {
+                 //check if element is a platform
+                 if(element instanceof Platform)
+                 { 
+                    var ontop = false;
+                    var below = false;
+                    
+                    //top of platform interaction
+                     if(that.lastBoundingBox.bottom <= element.boundingBox.top)
+                     { 
+                         that.grounded = true;
+                         that.y_pos = element.boundingBox.top-that.width;
+                         ontop = true;
+                     } else {
+                        that.grounded = false;
+                     }
+
+                      //hit head on bottom of platform
+                      if(that.lastBoundingBox.top > element.boundingBox.bottom)
+                      {
+                          that.y_vel = 0;
+                          that.y_pos = element.boundingBox.bottom+that.width;
+                          below = true;
+                      }
+
+                      console.log(below);
+
+                     //left side of platform interaction
+                     if(that.boundingBox.left < element.boundingBox.left
+                         && !ontop && !below)
+                     {
+                         that.x_pos = element.boundingBox.left-that.width;
+                     }
+ 
+                     //right side of platform interaction
+                     if(that.boundingBox.right > element.boundingBox.right
+                      && !ontop && !below)
+                     {
+                
+                         if(that.boundingBox.left < element.boundingBox.right && that.boundingBox.bottom < element.boundingBox.top)
+                         {
+                         } else
+                         {
+                            that.x_pos = element.boundingBox.right+that.width;
+                         }
+                     }
+                    
+                 }
+ 
+                 //check if element is ANY interactable
+                 if (element instanceof Interactable)
+                 {
+                     this.insideInteractable = true;
+                     this.currentInteractable = element;
+                 } else {
+                    this.insideInteractable = false;
+                 }
+             } else {
+                
+             }
+ 
+         });
+
+
+        //update bounding box again after handling collisions
+        this.setBoundingBox();
+
         //move character left
         if(this.game.leftkey)
         {
@@ -70,7 +141,7 @@ class Player {
         {
             this.y_accel = 0;
         } else {
-            this.y_accel = .05;
+            this.y_accel = window.innerHeight*0.0001023541*.5;
         }
 
       
@@ -81,7 +152,7 @@ class Player {
         this.y_vel += this.y_accel;
 
         //constant floorheight to reference (50 accounts for start-bar)
-        var floorheight = window.innerHeight-this.height-50
+        var floorheight = window.innerHeight-innerHeight*0.03070-window.innerHeight*0.051177;
 
         //keep character above ground
         if(this.y_pos > floorheight)
@@ -97,80 +168,32 @@ class Player {
         }
 
         //keep inside to the left
-        if(this.x_pos > window.innerWidth-this.boundingBox.width)
+        if(this.x_pos > window.innerWidth-this.width)
         {
-            this.x_pos = window.innerWidth - this.boundingBox.width;
+            this.x_pos = window.innerWidth - this.width;
         }
 
+        
+
         //interact with object
-        if(this.game.upkey && this.insideInteractable )
+        if(this.game.upkey && this.insideInteractable)
         {
-            document.getElementById(this.currentInteractable.popup).style.display = "block";
+            console.log('interacting with interactable');
+            document.getElementById(this.currentInteractable.modal_ID).style.display = "block";
+            console.log(document.getElementById(this.currentInteractable.modal_ID))
             this.formOpen = true;
         }
 
         //close interacted object
         if(this.game.downkey && this.formOpen)
         {
-            document.getElementById(this.currentInteractable.popup).style.display = "none";
+            document.getElementById(this.currentInteractable.modal_ID).style.display = "none";
         }
 
         //update bounding box before collision
         this.setBoundingBox();
     
-        //checking for collisions
-        var that = this;
-        this.game.entityList.forEach(element => {
-            if(element.boundingBox && that.boundingBox.collide(element.boundingBox))
-            {
-                //check if element is a platform
-                if(element instanceof Platform)
-                {
-                    //left side of platform interaction
-                    if(that.boundingBox.left < element.boundingBox.left
-                        && that.boundingBox.bottom > element.boundingBox.top)
-                    {
-                        that.x_pos = element.boundingBox.left-that.width;
-                    }
-
-                    //right side of platform interaction
-                    if(that.boundingBox.right > element.boundingBox.right
-                     && that.boundingBox.bottom > element.boundingBox.top)
-                    {
-                        that.x_pos = element.boundingBox.right+that.width;
-                    }
-
-                    
-
-                    //top of platform interaction
-                    if(that.lastBoundingBox.bottom <= element.boundingBox.top)
-                    { 
-                        that.grounded = true;
-                        that.y_pos = element.boundingBox.top-that.height;
-
-                    }
-
-                    //hit head on bottom of platform
-                    if(that.lastBoundingBox.top > element.boundingBox.bottom)
-                    {
-                        that.y_vel=0;
-                    }
-                }
-
-                //check if element is ANY interactable
-                if (element instanceof Interactable)
-                {
-                    this.insideInteractable = true;
-                    this.currentInteractable = element;
-                } 
-            } else {
-                this.insideInteractable = false;
-            }
-
-        });
-
-        //update bounding box again after handling collisions
-        this.setBoundingBox();
+    
 
     };
 
@@ -179,7 +202,7 @@ class Player {
     {
         this.ctx.strokeStyle = "blue";
         this.ctx.beginPath();
-        this.ctx.arc(this.x_pos,this.y_pos,this.width,0,2*Math.PI);
+        this.ctx.arc(this.x_pos,this.y_pos,window.innerHeight*0.03070,0,2*Math.PI);
         this.ctx.stroke();
     };
 
@@ -187,7 +210,7 @@ class Player {
     setBoundingBox()
     {
         this.lastBoundingBox = this.boundingBox;
-        this.boundingBox = new BoundingBox(this.x_pos-this.width,this.y_pos-this.width,this.width*2,this.height*2);
+        this.boundingBox = new BoundingBox(this.x_pos-innerHeight*0.03070,this.y_pos-innerHeight*0.03070,innerHeight*0.03070*2,innerHeight*0.03070*2);
         
         //draw debug bounding box
         if(false)

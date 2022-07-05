@@ -19,12 +19,35 @@
         <script src="scripts/main.js"></script>
 
 
-        <div class="form-popup" id="personalSites">
-            <form action="/action_page.php" class="form-container">
-              <a href="https://github.com/aaroneldridge" target = "_blank"> <img src="images/github_icon.png" height="100px" width="100px "></a> 
-              <a href="https://www.linkedin.com/in/aaron-eldridge-435472213/" target = "_blank"> <img src="images/linkedin_icon.png" height="100px" width="110px "></a> 
-        
-            </form>
+  
+
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+
+
+        <!-- The Modal -->
+        <div id="modal_personal_sites" class="modal">
+
+        <!-- Modal content -->
+          <div class="modal-content" id="personalSites">
+            <table id="personalSites-icons" >
+              <tr>
+                <td> <a href="https://github.com/aaroneldridge" target = "_blank"> <img src="images/github_icon.png" height="100px" width="100px "></a> </td>
+                <td> <a href="https://www.linkedin.com/in/aaron-eldridge-435472213/" target = "_blank"> <img src="images/linkedin_icon.png" height="100px" width="110px "></a> </td>
+                <td> <a href="https://twitter.com/aaroneldr" target = "_blank"> <img src="images/twitter_icon.png" height="100px" width="100px "></a> </td>
+              </tr>
+              <tr> 
+                <td class="icon-text">GitHub</td>
+                <td class="icon-text">Linkedin</td>  
+                <td class="icon-text">Twitter</td>  
+              </tr>
+                <td></td>
+              </tr>
+            </table>
+            <p class="close-info">
+              Down arrow key to close
+            </p>            
+          </div>
           </div>
 
     </body>
