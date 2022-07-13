@@ -10,6 +10,13 @@ class Engine {
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 
+		//on top of start bar
+		this.floorlevel = this.height-this.height*0.0399;
+		this.taskbarheight = this.height*0.0399;
+		this.iconheight = this.height*0.10235;
+		this.iconwidth = this.width*0.0538;
+		this.floorlevel_box = this.height-this.taskbarheight-this.iconheight;
+  
 		console.log('Width: ', window.innerWidth);
 		console.log('Height: ', window.innerHeight);
 
@@ -17,13 +24,13 @@ class Engine {
         this.entityList = [];
         this.player = new Player(this,canvas,ctx);
 		//										                x_pos				y_pos							width		      height
-		this.entityList.push(new Platform(		this,canvas,ctx,0,					this.height-this.height*0.1535,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,0,					this.floorlevel_box,	this.iconwidth,this.iconheight));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.3070,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,0,					this.height-this.height*0.5629,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.7676,	this.width*0.0538,this.height*0.10235));
 
-		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-this.height*0.1535,	this.width*0.0538,this.height*0.10235));
-		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-this.height*0.1535-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.floorlevel_box,	this.width*0.0538,this.height*0.10235));
+		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.floorlevel_box-this.iconheight,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535),	this.width*0.0538,this.height*0.10235));
 
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
@@ -31,7 +38,7 @@ class Engine {
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
 
-		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235,null));
+		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235,"modal_school_projects"));
 		this.entityList.push(new Interactable(	this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.8700,	this.width*0.0538,this.height*0.10235,"modal_personal_sites"));
 		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-(2*this.height*0.10235),	this.width*0.0538,this.height*0.10235,null));
 
@@ -50,9 +57,10 @@ class Engine {
 		//loading Images
 		this.backgroundImage = new Image();
 		this.backgroundImage.src = "images/bliss_pixel2.png";
+
 		this.backgroundImage.onload = function () {}
 		this.taskbarImage = new Image();
-		this.taskbarImage.src = "images/windows_taskbar.jpg"
+		this.taskbarImage.src = "images/taskbar.png"
 		this.taskbarImage.onload = function () {}
 
 
@@ -73,7 +81,7 @@ class Engine {
 		//windows hill background
 		this.ctx.drawImage(this.backgroundImage,0,0,window.innerWidth,window.innerHeight);
 		//windows taskbar background
-		this.ctx.drawImage(this.taskbarImage,0,this.height-this.height*0.051177,window.innerWidth,this.height*0.051177);
+		this.ctx.drawImage(this.taskbarImage,0,this.height-this.height*0.03991,window.innerWidth,this.taskbarheight);
 
 		//icons go below vvv
 	};

@@ -5,25 +5,8 @@ canvas {
 body {
     margin: 0px;
 }
-
-/* The pop up information */
-.form-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 15px;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-  }
-
-/* Formatting the pop-up information */
-.form-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: rgb(43, 67, 128);
-  }
   
-#modal_personal_sites {
+.modal {
     display:none;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -45,24 +28,46 @@ body {
   width: 20%; /* Could be more or less, depending on screen size */
 }
 
+#schoolProjects { 
+  background-color: white;
+  margin: 15% auto ; /* 15% from the top and centered */
+  padding: 10px;
+  border: 3px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
 
 
-#personalSites-icons {
+#schoolProject-icons{
+  border-collapse:separate;
+  border-spacing:30px;
+}
+
+
+/*Icons for personal site popup*/
+.icons {
 align-items: center;
 text-align: center;
 margin:auto;
 }
 
-
+/*Descriptions for Icons*/
 .icon-text{
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: blue;
 }
 
+/*Info on down arrow key*/
 .close-info{
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: black;
   text-align: center;
   font-size: small;
+}
 
+.popup-title{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
 }
