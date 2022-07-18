@@ -77,7 +77,12 @@ class Player {
     update ()
     {
 
+        if(!this.menuOpen && this.currentInteractable != null)
+        {
+            document.getElementById(this.currentInteractable.modal_ID).style.display = "none";
+        }
 
+        
         //updating frame loop counter
         this.counter++;
         if(this.counter == 50)
