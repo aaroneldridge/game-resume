@@ -39,7 +39,7 @@ body {
   margin: 15% auto ; /* 15% from the top and centered */
   padding: 10px;
   border: 3px solid #888;
-  width: 20%; /* Could be more or less, depending on screen size */
+  width: 40%; /* Could be more or less, depending on screen size */
 }
 
 #greeting{
@@ -55,7 +55,7 @@ body {
   margin: 15% auto ; /* 15% from the top and centered */
   padding: 10px;
   border: 3px solid #888;
-  width: 40%; /* Could be more or less, depending on screen size */
+  width: 60%; /* Could be more or less, depending on screen size */
 }
 
 #personalProjects{background-color: white;
@@ -81,7 +81,6 @@ font-size: 20px;
 
 /*Icons for personal site popup*/
 .icons {
-align-items: center;
 text-align: center;
 margin:auto;
 }
