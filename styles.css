@@ -19,6 +19,20 @@ body {
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
   }
 
+.modal-two{
+  display:block;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+
+
   /* Modal Content/Box */
 #personalSites {
   background-color: white;
@@ -26,6 +40,14 @@ body {
   padding: 10px;
   border: 3px solid #888;
   width: 20%; /* Could be more or less, depending on screen size */
+}
+
+#greeting{
+  background-color: white;
+  margin: 15% auto ; /* 15% from the top and centered */
+  padding: 10px;
+  border: 3px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
 }
 
 #schoolProjects { 
@@ -36,12 +58,26 @@ body {
   width: 40%; /* Could be more or less, depending on screen size */
 }
 
+#personalProjects{background-color: white;
+  margin: 15% auto ; /* 15% from the top and centered */
+  padding: 10px;
+  border: 3px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */}
+
 
 #schoolProject-icons{
   border-collapse:separate;
   border-spacing:30px;
 }
 
+.intro_title{
+text-align: center;
+font-size: 20px;
+}
+
+.intro_body{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 /*Icons for personal site popup*/
 .icons {
@@ -70,4 +106,9 @@ margin:auto;
   text-align: center;
   font-weight: bold;
   font-size: large;
+}
+
+#start_button{
+background-color: blue;
+color:white;
 }

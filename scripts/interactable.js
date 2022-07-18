@@ -47,12 +47,14 @@ class Interactable
     
     draw()
     {
+        if(false){
         this.ctx.strokeStyle = "green";
         this.ctx.beginPath();
         this.ctx.rect(this.x_pos,this.y_pos,this.width,this.height);
         this.ctx.fillStyle = "green";
         this.ctx.fill();
         this.ctx.stroke();
+        }
     };
 
 }

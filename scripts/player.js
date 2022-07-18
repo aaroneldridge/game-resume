@@ -26,11 +26,14 @@ class Player {
         this.lastBoundingBox = null;
         this.setBoundingBox();
 
+        var title = "modal_greeting";
+
         //check relationship with interactable objects
         this.insideInteractable = false;
         this.currentInteractable = null;
         this.canInteract = true;
-        this.formOpen = false;
+        this.formOpen = true;
+        this.menuOpen = true;
 
         //animator to draw character model
         this.spritesheet = new Image();
@@ -38,13 +41,13 @@ class Player {
         //spritesheet, xStart, yStart, width, height, frameCount, reverse
 
         //right facing
-        this.animateright = new Animator(this.spritesheet,0,95,65,85,4,false);
+        this.animateright = new Animator(this.spritesheet,0,95,65,85,window.innerHeight*0.004,false);
         //left facing
-        this.animateleft = new Animator(this.spritesheet,0,192,65,85,4,false);
+        this.animateleft = new Animator(this.spritesheet,0,192,65,85,window.innerHeight*0.004,false);
         //left still
-        this.animaterightstil = new Animator(this.spritesheet,0,95,65,85,4,false);
+        this.animaterightstil = new Animator(this.spritesheet,0,95,65,85,window.innerHeight*0.004,false);
         //right still
-        this.animateleftstill = new Animator(this.spritesheet,0,95,65,85,4,false);
+        this.animateleftstill = new Animator(this.spritesheet,0,95,65,85,window.innerHeight*0.004,false);
 
         //which frame of drawing loop
         this.frameloop = 0;
@@ -56,12 +59,24 @@ class Player {
         this.still = false;
         this.jumping = false;
 
+        this.buttonSetup();
+
+    };
+
+    buttonSetup(){
+        var that = this;
+        document.getElementById("start_button").onclick = function () {
+            document.getElementById("modal_greeting").style.display="none";
+            that.formOpen=false;
+            that.menuOpen=false;
+        };
 
     };
 
     //updating the player for the next frame
     update ()
     {
+
 
         //updating frame loop counter
         this.counter++;
@@ -80,10 +95,11 @@ class Player {
          //checking for collisions
          var that = this;
          var wasgrounded = false;
+         var collided = false;
          this.game.entityList.forEach(element => {
              if(element.boundingBox && that.boundingBox.collide(element.boundingBox))
              {
-                console.log('collision');
+                collided = true;
                  //check if element is a platform
                  if(element instanceof Platform)
                  { 
@@ -131,11 +147,26 @@ class Player {
                      this.currentInteractable = element;
                  } else {
                     this.insideInteractable = false;
+                    this.currentInteractable = null;
                  }
-             } else if (!wasgrounded) {
+            } else if(!collided)
+             {
+                this.currentInteractable =null;
+             } 
+             
+             
+             if (!wasgrounded) {
                 that.grounded = false;
+             } else {
+                this.currentInteractable = null;
              }
 
+
+
+
+
+
+             
              if(this.y_pos+this.height == this.game.floorlevel)
              {
                 that.grounded = true;
@@ -148,21 +179,21 @@ class Player {
         this.setBoundingBox();
 
         //move character left
-        if(this.game.leftkey)
+        if(this.game.leftkey && !this.menuOpen)
         {
-            this.x_vel = window.innerWidth*-0.001614;
+            this.x_vel = window.innerWidth*-0.001614*.75;
         }
 
         //move character right
-        if(this.game.rightkey)
+        if(this.game.rightkey && !this.menuOpen)
         {
-            this.x_vel = window.innerWidth*0.001614;
+            this.x_vel = window.innerWidth*0.001614*.75;
         }
 
         //jump function
-        if(this.game.spacekey && this.grounded)
+        if(this.game.spacekey && this.grounded && !this.menuOpen)
         {
-            this.y_vel = -5;
+            this.y_vel = window.innerHeight*-0.005;
             this.grounded = false;
         }
 
@@ -179,7 +210,7 @@ class Player {
             this.y_vel = 0;
         } else {
             //create higher gravity when window is smaller
-            this.y_accel = .045*(977/window.innerHeight);
+            this.y_accel = window.innerHeight*0.0048*.01;
         }
 
       
@@ -215,17 +246,18 @@ class Player {
         
 
         //interact with object
-        if(this.game.upkey && this.insideInteractable)
+        if(this.game.upkey && this.insideInteractable && this.currentInteractable != null)
         {
-            console.log('interacting with interactable');
             document.getElementById(this.currentInteractable.modal_ID).style.display = "block";
-            console.log(document.getElementById(this.currentInteractable.modal_ID))
             this.formOpen = true;
+            this.menuOpen = true;
         }
 
         //close interacted object
         if(this.game.downkey && this.formOpen)
         {
+            this.menuOpen = false;
+            this.formOpen = false;
             document.getElementById(this.currentInteractable.modal_ID).style.display = "none";
         }
 
@@ -263,7 +295,6 @@ class Player {
     draw()
     {
 
-
         if(this.still)
         {
             if(this.walkingright)
@@ -272,16 +303,17 @@ class Player {
             } else {
                 this.animateleft.drawFrame(this.ctx,0,this.x_pos,this.y_pos,1);
             }
-        } else
-        if(this.walkingright)
-        {
-            this.animateright.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,1);
-        } else
-        if(this.walkingleft)
-        {
-            this.animateleft.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,1);
+        } else {
+            if(this.walkingright)
+            {
+                this.animateright.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,1);
+            } else
+            if(this.walkingleft)
+            {
+                this.animateleft.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,1);
+            } 
         }
-        
+     
 
     };
 
@@ -292,7 +324,7 @@ class Player {
         this.boundingBox = new BoundingBox(this.x_pos,this.y_pos,this.width,this.height);
         
         //draw debug bounding box
-        if(true)
+        if(false)
         {
             this.ctx.strokeStyle = "red";
             this.ctx.beginPath();

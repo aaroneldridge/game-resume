@@ -46,12 +46,16 @@ class Platform
     
     draw()
     {
-        this.ctx.strokeStyle = "black";
+        //draws black boxes
+        if(false)
+        {this.ctx.strokeStyle = "black";
         this.ctx.beginPath();
         this.ctx.rect(this.x_pos,this.y_pos,this.width,this.height);
         this.ctx.fillStyle = "black";
         this.ctx.fill();
         this.ctx.stroke();
+    }
+        
     };
 
 }

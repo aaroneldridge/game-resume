@@ -28,11 +28,8 @@ class Engine {
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.3070,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,0,					this.height-this.height*0.5629,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.7676,	this.width*0.0538,this.height*0.10235));
-
-		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.floorlevel_box,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.floorlevel_box-this.iconheight,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535),	this.width*0.0538,this.height*0.10235));
-
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-this.width*0.0538,	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(5*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
 		this.entityList.push(new Platform(		this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235));
@@ -40,7 +37,7 @@ class Engine {
 
 		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235,"modal_school_projects"));
 		this.entityList.push(new Interactable(	this,canvas,ctx,this.width*0.1076,	this.height-this.height*0.8700,	this.width*0.0538,this.height*0.10235,"modal_personal_sites"));
-		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-(2*this.height*0.10235),	this.width*0.0538,this.height*0.10235,null));
+		this.entityList.push(new Interactable(	this,canvas,ctx,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-(2*this.height*0.10235),	this.width*0.0538,this.height*0.10235,"modal_personal_projects"));
 
 
 
@@ -57,11 +54,56 @@ class Engine {
 		//loading Images
 		this.backgroundImage = new Image();
 		this.backgroundImage.src = "images/bliss_pixel2.png";
-
 		this.backgroundImage.onload = function () {}
+
 		this.taskbarImage = new Image();
-		this.taskbarImage.src = "images/taskbar.png"
+		this.taskbarImage.src = "images/taskbar.png";
 		this.taskbarImage.onload = function () {}
+
+		//loading icons
+		this.edgeIcon = new Image();
+		this.edgeIcon.src = "images/icons/edge_icon.png";
+		this.edgeIcon.onload = function () {}
+
+		this.folderIcon = new Image();
+		this.folderIcon.src = "images/icons/folder_one.png";
+		this.folderIcon.onload = function () {}
+
+		this.folderIcon_two = new Image();
+		this.folderIcon_two.src = "images/icons/folder_two.png";
+		this.folderIcon_two.onload = function () {}
+
+		this.folderIcon_three = new Image();
+		this.folderIcon_three.src = "images/icons/folder_three.png";
+		this.folderIcon_three.onload = function () {}
+
+		this.mediaIcon = new Image();
+		this.mediaIcon.src = "images/icons/media_icon.png";
+		this.mediaIcon.onload = function () {}
+
+		this.mediaIcon = new Image();
+		this.mediaIcon.src = "images/icons/media_icon.png";
+		this.mediaIcon.onload = function () {}
+
+		this.noteIcon = new Image();
+		this.noteIcon.src = "images/icons/note_icon.png";
+		this.noteIcon.onload = function () {}
+
+		this.paintIcon = new Image();
+		this.paintIcon.src = "images/icons/paint_Icon.png";
+		this.paintIcon.onload = function () {}
+
+		this.recyclingIcon = new Image();
+		this.recyclingIcon.src = "images/icons/recycling_bin.png";
+		this.recyclingIcon.onload = function () {}
+
+		this.VSIcon = new Image();
+		this.VSIcon.src = "images/icons/VS_icon.png";
+		this.VSIcon.onload = function () {}
+
+		
+
+
 
 
     };
@@ -84,6 +126,19 @@ class Engine {
 		this.ctx.drawImage(this.taskbarImage,0,this.height-this.height*0.03991,window.innerWidth,this.taskbarheight);
 
 		//icons go below vvv
+		this.ctx.drawImage(this.noteIcon,0,this.floorlevel_box,this.iconwidth,this.iconheight);
+
+
+		this.ctx.drawImage(this.VSIcon,this.width*0.1076,	this.height-this.height*0.3070,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.recyclingIcon,0,this.height-this.height*0.5629,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.folderIcon,this.width*0.1076,	this.height-this.height*0.7676,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.noteIcon,this.width-this.width*0.0538,	this.floorlevel_box-this.iconheight,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.folderIcon_two,this.width-(3*this.width*0.0538),	this.height-(3*this.height*0.1535),	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.mediaIcon,this.width-this.width*0.0538,	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.noteIcon,this.width-(5*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.paintIcon,this.width-(3*this.width*0.0538),	this.height-(5*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235);
+		this.ctx.drawImage(this.folderIcon_three,this.width-(9*this.width*0.0538),	this.height-(4*this.height*0.1535)-this.height*0.10235,	this.width*0.0538,this.height*0.10235);
+
 	};
 
     loop ()
