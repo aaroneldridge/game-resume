@@ -41,13 +41,13 @@ class Player {
         //spritesheet, xStart, yStart, width, height, frameCount, reverse
 
         //right facing
-        this.animateright = new Animator(this.spritesheet,0,95,65,85,window.innerHeight*0.004,false);
+        this.animateright = new Animator(this.spritesheet,0,95,65,85,1,false);
         //left facing
-        this.animateleft = new Animator(this.spritesheet,0,192,65,85,window.innerHeight*0.004,false);
+        this.animateleft = new Animator(this.spritesheet,0,192,65,85,1,false);
         //left still
-        this.animaterightstil = new Animator(this.spritesheet,0,95,65,85,window.innerHeight*0.004,false);
+        this.animaterightstil = new Animator(this.spritesheet,0,95,65,85,1,false);
         //right still
-        this.animateleftstill = new Animator(this.spritesheet,0,95,65,85,window.innerHeight*0.004,false);
+        this.animateleftstill = new Animator(this.spritesheet,0,95,65,85,1,false);
 
         //which frame of drawing loop
         this.frameloop = 0;
@@ -299,18 +299,18 @@ class Player {
         {
             if(this.walkingright)
             {
-                this.animateright.drawFrame(this.ctx,1,this.x_pos,this.y_pos,1);
+                this.animateright.drawFrame(this.ctx,1,this.x_pos,this.y_pos,(window.innerHeight/977));
             } else {
-                this.animateleft.drawFrame(this.ctx,0,this.x_pos,this.y_pos,1);
+                this.animateleft.drawFrame(this.ctx,0,this.x_pos,this.y_pos,(window.innerHeight/977));
             }
         } else {
             if(this.walkingright)
             {
-                this.animateright.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,1);
+                this.animateright.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,(window.innerHeight/977));
             } else
             if(this.walkingleft)
             {
-                this.animateleft.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,1);
+                this.animateleft.drawFrame(this.ctx,this.frameloop,this.x_pos,this.y_pos,(window.innerHeight/977));
             } 
         }
      
