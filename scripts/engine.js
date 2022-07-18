@@ -90,7 +90,7 @@ class Engine {
 		this.noteIcon.onload = function () {}
 
 		this.paintIcon = new Image();
-		this.paintIcon.src = "./images/Icons/paint_Icon.png";
+		this.paintIcon.src = "./images/Icons/paint_icon.png";
 		this.paintIcon.onload = function () {}
 
 		this.recyclingIcon = new Image();
