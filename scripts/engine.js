@@ -53,52 +53,52 @@ class Engine {
 
 		//loading Images
 		this.backgroundImage = new Image();
-		this.backgroundImage.src = "images/bliss_pixel2.png";
+		this.backgroundImage.src = "./images/bliss_pixel2.png";
 		this.backgroundImage.onload = function () {}
 
 		this.taskbarImage = new Image();
-		this.taskbarImage.src = "images/taskbar.png";
+		this.taskbarImage.src = "./images/taskbar.png";
 		this.taskbarImage.onload = function () {}
 
 		//loading icons
 		this.edgeIcon = new Image();
-		this.edgeIcon.src = "images/icons/edge_icon.png";
+		this.edgeIcon.src = "./images/icons/edge_icon.png";
 		this.edgeIcon.onload = function () {}
 
 		this.folderIcon = new Image();
-		this.folderIcon.src = "images/icons/folder_one.png";
+		this.folderIcon.src = "./images/icons/folder_one.png";
 		this.folderIcon.onload = function () {}
 
 		this.folderIcon_two = new Image();
-		this.folderIcon_two.src = "images/icons/folder_two.png";
+		this.folderIcon_two.src = "./images/icons/folder_two.png";
 		this.folderIcon_two.onload = function () {}
 
 		this.folderIcon_three = new Image();
-		this.folderIcon_three.src = "images/icons/folder_three.png";
+		this.folderIcon_three.src = "./images/icons/folder_three.png";
 		this.folderIcon_three.onload = function () {}
 
 		this.mediaIcon = new Image();
-		this.mediaIcon.src = "images/icons/media_icon.png";
+		this.mediaIcon.src = "./images/icons/media_icon.png";
 		this.mediaIcon.onload = function () {}
 
 		this.mediaIcon = new Image();
-		this.mediaIcon.src = "images/icons/media_icon.png";
+		this.mediaIcon.src = "./images/icons/media_icon.png";
 		this.mediaIcon.onload = function () {}
 
 		this.noteIcon = new Image();
-		this.noteIcon.src = "images/icons/note_icon.png";
+		this.noteIcon.src = "./images/icons/note_icon.png";
 		this.noteIcon.onload = function () {}
 
 		this.paintIcon = new Image();
-		this.paintIcon.src = "images/icons/paint_Icon.png";
+		this.paintIcon.src = "./images/icons/paint_Icon.png";
 		this.paintIcon.onload = function () {}
 
 		this.recyclingIcon = new Image();
-		this.recyclingIcon.src = "images/icons/recycling_bin.png";
+		this.recyclingIcon.src = "./images/icons/recycling_bin.png";
 		this.recyclingIcon.onload = function () {}
 
 		this.VSIcon = new Image();
-		this.VSIcon.src = "images/icons/VS_icon.png";
+		this.VSIcon.src = "./images/icons/VS_icon.png";
 		this.VSIcon.onload = function () {}
 
 		
